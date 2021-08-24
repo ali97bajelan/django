@@ -11,7 +11,9 @@ class Post(models.Model):
     class Meta:
         ordering = ['date'] 
 
-    #comments = models.
+
+
+    #comments = models
     def __str__(self):
         return self.title    
 
