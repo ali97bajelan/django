@@ -6,9 +6,9 @@
   <h2>Dynamic content</h2>
   <p>The blog has the following record counts:</p>
   <ul>
-    <li><strong>Books:</strong> {{ num_books }}</li>
-    <li><strong>Copies:</strong> {{ num_instances }}</li>
-    <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
-    <li><strong>Authors:</strong> {{ num_authors }}</li>
+    <li><strong>Posts:</strong> {{ no_posts }}</li>
+    <li><strong>Authors:</strong> {{ no_author }}</li>
+    <li><strong>Users:</strong> {{ no_user }}</li>
+    <li><strong>You have visited this page:</strong> {{ no_visits }} time{{ no_visits|pluralize }}</li>
   </ul>
 {% endblock %}
