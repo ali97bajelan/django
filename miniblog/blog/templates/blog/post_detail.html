@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Title: {{ post.title }}</h1>
+
+<p><strong>Author:</strong> <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a></p>
+<p><strong>Date:</strong> {{ post.date }}</p> 
+<p><strong>Description:</strong> {{ post.description }}</p>
+
+
+<div style="margin-left:20px;margin-top:20px">
+
+</div>
+{% endblock %}
+

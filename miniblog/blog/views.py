@@ -27,7 +27,13 @@ class PostListView(generic.ListView):
     model = Post
     paginate_by = 20
 
+class BloggerDetailView(generic.DetailView):
+    """Generic class-based detail view for an author."""
+    model = Blogger
 
+class PostDetailView(generic.DetailView):
+    """Generic class-based detail view for an author."""
+    model = Post
 '''
 def bloggers_list(request):
     list_of_bloggers = Blogger.objects.all()
