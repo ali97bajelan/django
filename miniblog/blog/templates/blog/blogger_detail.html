@@ -5,14 +5,16 @@
 <h1>Blogger: {{ blogger }} </h1>
 
 <div style="margin-left:20px;margin-top:20px">
-<h4>Posts</h4>
+<h3>Biography</h3>
+<dd>{{blogger.biography}}</dd>
 
+<h3>Posts</h3>
+<ul>
 <dl>
 {% for post in blogger.post_set.all %}
   <dt><a href="{% url 'post-detail' post.pk %}">{{post}}</a> ({{post.date}})</dt>
-  <dd>{{post.title}}</dd>
 {% endfor %}
 </dl>
-
+</ul>
 </div>
 {% endblock %}

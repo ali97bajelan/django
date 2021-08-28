@@ -1,7 +1,9 @@
 from django.shortcuts import render
 
-from .models import Post,Blogger,User
+from .models import Post,Blogger,User,Comment
+from .forms import CommentForm
 from django.views import generic
+from django.views.generic.edit import CreateView
 # Create your views here.
 
 def index(request):
@@ -34,6 +36,28 @@ class BloggerDetailView(generic.DetailView):
 class PostDetailView(generic.DetailView):
     """Generic class-based detail view for an author."""
     model = Post
+
+
+def addComment(request,pk):
+    print(request.method)
+    if request.method == 'POST':
+        myCommentForm = CommentForm(request.POST)
+        if myCommentForm.is_valid():
+            print(myCommentForm.cleaned_data)
+            comment = Comment()
+            comment.text = myCommentForm.cleaned_data['text']
+            comment.post = myCommentForm.cleaned_data['post']
+
+            comment.author = myCommentForm.cleaned_data['user']
+            comment.save()
+            is_saved = True
+    else:
+        print(locals())
+        return render(request,'blog/add_comment.html',locals())
+        myProfileForm = CommentForm()
+   
+    return render(request,'blog/saved.html',locals())
+
 '''
 def bloggers_list(request):
     list_of_bloggers = Blogger.objects.all()
