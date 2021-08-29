@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from .models import Post,Blogger,User,Comment
+from .models import Post, Blogger, User, Comment
 from .forms import CommentForm
 from django.views import generic
 from django.views.generic.edit import CreateView
 # Create your views here.
+
 
 def index(request):
     no_posts = Post.objects.all().count()
@@ -13,9 +14,11 @@ def index(request):
 
     no_visits = request.session.get('no_visits', 1)
     request.session['no_visits'] = no_visits+1
-    data = {'no_posts':no_posts,'no_author':no_blogger,'no_user':no_user,'no_visits':no_visits}
+    data = {'no_posts': no_posts, 'no_author': no_blogger,
+            'no_user': no_user, 'no_visits': no_visits}
 
-    return render(request,'index.html',context=data)
+    return render(request, 'index.html', context=data)
+
 
 class BloggerListView(generic.ListView):
     """Generic class-based list view for a list of bloggers."""
@@ -29,34 +32,34 @@ class PostListView(generic.ListView):
     model = Post
     paginate_by = 20
 
+
 class BloggerDetailView(generic.DetailView):
     """Generic class-based detail view for an author."""
     model = Blogger
+
 
 class PostDetailView(generic.DetailView):
     """Generic class-based detail view for an author."""
     model = Post
 
 
-def addComment(request,pk):
-    print(request.method)
+def addComment(request, pk):
+    post = Post.objects.get(pk=pk)
     if request.method == 'POST':
         myCommentForm = CommentForm(request.POST)
         if myCommentForm.is_valid():
             print(myCommentForm.cleaned_data)
             comment = Comment()
             comment.text = myCommentForm.cleaned_data['text']
-            comment.post = myCommentForm.cleaned_data['post']
-
-            comment.author = myCommentForm.cleaned_data['user']
+            comment.post = post
+            comment.author = User.objects.get(username=request.user.username)
             comment.save()
-            is_saved = True
     else:
-        print(locals())
-        return render(request,'blog/add_comment.html',locals())
-        myProfileForm = CommentForm()
-   
-    return render(request,'blog/saved.html',locals())
+        return render(request, 'blog/add_comment.html', context={'form': CommentForm, 'post': post})
+
+    return redirect(post.get_absolute_url())
+    #return render(request,'blog/saved.html',locals())
+
 
 '''
 def bloggers_list(request):

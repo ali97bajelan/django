@@ -15,4 +15,4 @@ class LoginForm(forms.Form):
     '''
 
 class CommentForm(forms.Form):
-    text = forms.TextInput()
+    text = forms.CharField(widget=forms.Textarea)

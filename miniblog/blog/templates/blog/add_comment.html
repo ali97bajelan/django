@@ -1,41 +1,13 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<p>Post your comment for: <a href="{% url 'post-detail' pk %}">{{post.title}}</a></p>
+<p>Write your comment for: <a href="{% url 'post-detail' post.id %}">{{post.title}}</a></p>
 
-<form name = "form" action = "{% url "add-comment" pk %}" 
+<form name = "form" action = "{% url "add-comment" post.id %}" 
 method = "POST" >{% csrf_token %}
+{{form}}
 
-<div style = "max-width:470px;">
-   <center> 
-      <input type = "text" style = "margin-left:20%;" 
-         placeholder = "Identifiant" name = "username" />
-   </center>
-</div>
-   
-<br>
-
-<div style = "max-width:470px;">
-   <center>
-      <input type = "password" style = "margin-left:20%;" 
-         placeholder = "password" name = "password" />
-   </center>
-</div>
-   
-<br>
-
-<div style = "max-width:470px;">
-   <center> 
-   
-      <button style = "border:0px; background-color:#4285F4; margin-top:8%;
-         height:35px; width:80%;margin-left:19%;" type = "submit" 
-         value = "Login" >
-         <strong>Login</strong>
-      </button>
-      
-   </center>
-</div>
-
+<input type="submit" value = "send comment">
 </form>
 
 {% endblock %}
