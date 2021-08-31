@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 
-from .models import Post, Blogger, User, Comment
+from .models import Post, Blogger, Comment
+from django.contrib.auth.models import User
+
 from .forms import CommentForm
 from django.views import generic
 from django.views.generic.edit import CreateView
+
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -43,6 +47,7 @@ class PostDetailView(generic.DetailView):
     model = Post
 
 
+@login_required
 def addComment(request, pk):
     post = Post.objects.get(pk=pk)
     if request.method == 'POST':
