@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<form name = "form" action = "{% url "add" %}" 
+method = "POST" >{% csrf_token %}
+{{form}}
+
+<input type="submit" value = "add page">
+</form>
+
+{% endblock %}

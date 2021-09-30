@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Mini Blog Home</h1>
+  <p>Welcome to MiniBlog, a website developed by <em>Ali Bajelan</em>!</p>
+  <h2>Dynamic content</h2>
+  <p>The blog has the following record counts:</p>
+  <ul>
+    <li><strong>Posts:</strong> {{ no_posts }}</li>
+    <li><strong>Authors:</strong> {{ no_author }}</li>
+    <li><strong>Users:</strong> {{ no_user }}</li>
+    <li><strong>You have visited this page:</strong> {{ no_visits }} time{{ no_visits|pluralize }}</li>
+  </ul>
+{% endblock %}
